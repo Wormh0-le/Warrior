@@ -55,6 +55,7 @@ Build/*
 
 Content/StarterContent/*
 Content/__External*
+Content
 
 # Whitelist PakBlacklist-<BuildConfiguration>.txt files
 !Build/*/
