@@ -6,6 +6,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "WarriorDebugHelper.h"
 #include "WarriorGameplayTags.h"
+#include "AbilityStystem/WarriorAbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/Input/WarriorInputComponent.h"
@@ -35,8 +36,6 @@ AWarriorHeroCharacter::AWarriorHeroCharacter()
 	GetCharacterMovement()->MaxWalkSpeed = 450.f;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 500.f, 0.f);
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
-	
-	
 }
 
 void AWarriorHeroCharacter::BeginPlay()
@@ -55,6 +54,18 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	UWarriorInputComponent* WarriorInputComponent = CastChecked<UWarriorInputComponent>(PlayerInputComponent);
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
+}
+
+void AWarriorHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	if (WarriorAbilitySystemComponent && WarriorAttributeSet)
+	{
+		const FString ASCText = FString::Printf(TEXT("Owner Actor: %s, AvatarActor: %s"), *WarriorAbilitySystemComponent->GetOwnerActor()->GetActorLabel(), *WarriorAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
+		
+		Debug::Print(TEXT("Ability System component Valid") + ASCText, FColor::Green);
+		Debug::Print(TEXT("AttributeSet Valid") + ASCText, FColor::Green);
+	}
 }
 
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
