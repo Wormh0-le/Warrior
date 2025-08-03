@@ -1,5 +1,4 @@
 // Advanced Action RPG Learning, Wormhole All Rights Reserved
 
 
-#include "Items/Weapons/WarriorHeroWeapon.h"
-
+#include "WarriorTypes/WarriorStructTypes.h"
