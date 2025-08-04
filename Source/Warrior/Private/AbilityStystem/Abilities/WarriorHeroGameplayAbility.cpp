@@ -3,6 +3,8 @@
 
 #include "AbilityStystem/Abilities/WarriorHeroGameplayAbility.h"
 
+#include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
+
 #include "Characters/WarriorHeroCharacter.h"
 #include "Controllers/WarriorHeroController.h"
 
@@ -26,5 +28,6 @@ AWarriorHeroController* UWarriorHeroGameplayAbility::GetHeroControllerFromActorI
 
 UHeroCombatComponent* UWarriorHeroGameplayAbility::GetHeroCombatComponentFromActorInfo()
 {
+	
 	return GetHeroCharacterFromActorInfo()->GetHeroCombatComponent();
 }
