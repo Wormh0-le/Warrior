@@ -2,9 +2,10 @@
 
 #pragma once
 #include "GameplayTagContainer.h"
-
 #include "WarriorStructTypes.generated.h"
 
+
+class UInputMappingContext;
 class UWarriorGameplayAbility;
 class UWarriorHeroLinkedAnimLayer;
 
@@ -29,4 +30,10 @@ struct FWarriorHeroWeaponData
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UWarriorHeroLinkedAnimLayer> WeaponAnimLayerToLink;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputMappingContext* WeaponInputMappingContext;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TArray<FWarriorHeroAbilitySet> DefaultWeaponAbilities;
 };
