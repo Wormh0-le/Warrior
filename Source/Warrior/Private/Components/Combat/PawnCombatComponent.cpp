@@ -6,6 +6,8 @@
 
 #include "WarriorDebugHelper.h" 
 
+#include "Components/BoxComponent.h"
+
 
 void UPawnCombatComponent::RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister,
 	AWarriorWeaponBase* InWeaponToRegister, bool bRegisterAsEquippedWeapon)
@@ -43,4 +45,21 @@ AWarriorWeaponBase* UPawnCombatComponent::GetCharacterCurrentEquippedWeapon() co
 {
 	if (!CurrentEquippedWeaponTag.IsValid())	return nullptr;
 	return GetCharacterCarriedWeaponByTag(CurrentEquippedWeaponTag);
+}
+
+void UPawnCombatComponent::ToggleWeaponCollision(bool bEnableCollision, EToggleDamageType ToggleDamageType)
+{
+	if (ToggleDamageType == EToggleDamageType::CurrentEquippedWeapon)
+	{
+		AWarriorWeaponBase* WeaponToToggle = GetCharacterCurrentEquippedWeapon();
+		check(WeaponToToggle);
+		if (bEnableCollision)
+		{
+			WeaponToToggle->GetWeaponCollisionBox()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);	
+		}
+		else
+		{
+			WeaponToToggle->GetWeaponCollisionBox()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		}
+	}
 }
