@@ -3,8 +3,8 @@
 
 #include "DataAssets/StartupData/DataAsset_StartupDataBase.h"
 
-#include "AbilityStystem/WarriorAbilitySystemComponent.h"
-#include "AbilityStystem/Abilities/WarriorGameplayAbility.h"
+#include "Warrior/Public/AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "Warrior/Public/AbilitySystem/Abilities/WarriorGameplayAbility.h"
 
 void UDataAsset_StartupDataBase::GiveToAbilitySystemComponent(UWarriorAbilitySystemComponent* InASCToGive,
 	int32 ApplyLevel)

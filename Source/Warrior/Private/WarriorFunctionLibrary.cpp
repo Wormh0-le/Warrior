@@ -4,7 +4,7 @@
 #include "WarriorFunctionLibrary.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
-#include "AbilityStystem/WarriorAbilitySystemComponent.h"
+#include "../Public/AbilitySystem/WarriorAbilitySystemComponent.h"
 
 
 UWarriorAbilitySystemComponent* UWarriorFunctionLibrary::NativeGetWarriorASCFromActor(AActor* InActor)

@@ -1,10 +1,10 @@
 // Advanced Action RPG Learning, Wormhole All Rights Reserved
 
 
-#include "AbilityStystem/Abilities/WarriorGameplayAbility.h"
+#include "Warrior/Public/AbilitySystem/Abilities/WarriorGameplayAbility.h"
 
 #include "AbilitySystemComponent.h"
-#include "AbilityStystem/WarriorAbilitySystemComponent.h"
+#include "Warrior/Public/AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "Components/Combat/PawnCombatComponent.h"
 
 void UWarriorGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo,

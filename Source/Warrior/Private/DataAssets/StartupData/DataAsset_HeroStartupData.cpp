@@ -3,8 +3,8 @@
 
 #include "DataAssets/StartupData/DataAsset_HeroStartupData.h"
 
-#include "AbilityStystem/WarriorAbilitySystemComponent.h"
-#include "AbilityStystem/Abilities/WarriorHeroGameplayAbility.h"
+#include "Warrior/Public/AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "Warrior/Public/AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
 #include "WarriorTypes/WarriorStructTypes.h"
 
 

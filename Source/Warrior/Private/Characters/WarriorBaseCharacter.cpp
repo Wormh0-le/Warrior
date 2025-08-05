@@ -4,8 +4,8 @@
 #include "Characters/WarriorBaseCharacter.h"
 
 #include "NavigationSystemTypes.h"
-#include "AbilityStystem/WarriorAbilitySystemComponent.h"
-#include "AbilityStystem/WarriorAttributeSet.h"
+#include "Warrior/Public/AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "Warrior/Public/AbilitySystem/WarriorAttributeSet.h"
 
 
 // Sets default values

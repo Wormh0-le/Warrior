@@ -4,9 +4,8 @@
 #include "Characters/WarriorHeroCharacter.h"
 
 #include "EnhancedInputSubsystems.h"
-#include "WarriorDebugHelper.h"
 #include "WarriorGameplayTags.h"
-#include "AbilityStystem/WarriorAbilitySystemComponent.h"
+#include "Warrior/Public/AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components//Combat/HeroCombatComponent.h"
@@ -15,6 +14,7 @@
 #include "DataAssets/StartupData/DataAsset_StartupDataBase.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+
 
 AWarriorHeroCharacter::AWarriorHeroCharacter()
 {

@@ -1,7 +1,7 @@
 // Advanced Action RPG Learning, Wormhole All Rights Reserved
 
 
-#include "AbilityStystem/Abilities/WarriorHeroGameplayAbility.h"
+#include "Warrior/Public/AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
 
 #include "Characters/WarriorHeroCharacter.h"
 #include "Controllers/WarriorHeroController.h"

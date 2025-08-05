@@ -1,4 +1,4 @@
 // Advanced Action RPG Learning, Wormhole All Rights Reserved
 
 
-#include "Warrior/Public/AbilitySystem/WarriorAttributeSet.h"
+#include "DataAssets/StartupData/DataAsset_EnemyStartupData.h"
