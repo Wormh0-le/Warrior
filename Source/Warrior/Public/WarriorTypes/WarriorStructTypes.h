@@ -32,7 +32,7 @@ struct FWarriorHeroWeaponData
 	TSubclassOf<UWarriorHeroLinkedAnimLayer> WeaponAnimLayerToLink;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputMappingContext* WeaponInputMappingContext;
+	UInputMappingContext* WeaponInputMappingContext{};
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TArray<FWarriorHeroAbilitySet> DefaultWeaponAbilities;
