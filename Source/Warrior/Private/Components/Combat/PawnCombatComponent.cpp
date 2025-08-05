@@ -16,6 +16,17 @@ void UPawnCombatComponent::RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegis
 	check(InWeaponToRegister);
 
 	CharacterCarriedWeaponMap.Emplace(InWeaponTagToRegister, InWeaponToRegister);
+	/*
+	* Unreal Engine 委托常见绑定方法还有：
+	* - `BindUObject`：绑定到 UObject 成员函数，适用于需要访问对象成员的 C++ 逻辑。
+	* - `BindUFunction`：绑定到 UObject 的 UFUNCTION，适合蓝图交互或反射调用。
+	* - `BindLambda`：绑定到 Lambda 表达式，适合临时、轻量、无需成员变量的回调。
+	* - `BindStatic`：绑定到静态函数，适合无状态、工具类函数。
+	* - `AddDynamic`：用于动态委托，支持蓝图和序列化，适合事件广播。
+	* 选择依据：是否需要对象状态、是否与蓝图交互、是否需要序列化、是否为临时回调。
+	 */
+	InWeaponToRegister->OnWeaponHitTarget.BindUObject(this, &ThisClass::OnWeaponHitTargetActor);
+	InWeaponToRegister->OnWeaponEndHitTarget.BindUObject(this, &ThisClass::OnWeaponPullback);
 	if (bRegisterAsEquippedWeapon)
 	{
 		CurrentEquippedWeaponTag = InWeaponTagToRegister;
@@ -60,6 +71,15 @@ void UPawnCombatComponent::ToggleWeaponCollision(bool bEnableCollision, EToggleD
 		else
 		{
 			WeaponToToggle->GetWeaponCollisionBox()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			OverlappedActors.Empty();
 		}
 	}
+}
+
+void UPawnCombatComponent::OnWeaponHitTargetActor(AActor* TargetActor)
+{
+}
+
+void UPawnCombatComponent::OnWeaponPullback(AActor* TargetActor)
+{
 }

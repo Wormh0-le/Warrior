@@ -17,4 +17,7 @@ class WARRIOR_API UHeroCombatComponent : public UPawnCombatComponent
 public:
 	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
 	AWarriorHeroWeapon* GetHeroCarriedWeaponByTag(FGameplayTag InWeaponTag) const;
+
+	virtual void OnWeaponHitTargetActor(AActor* TargetActor) override;
+	virtual void OnWeaponPullback(AActor* TargetActor) override;
 };
