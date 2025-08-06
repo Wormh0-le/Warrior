@@ -11,4 +11,5 @@ UWarriorAttributeSet::UWarriorAttributeSet()
 	InitMaxRage(1.f);
 	InitAttackPower(1.f);
 	InitDefencePower(1.f);
+	InitOutputDamage(0.f);
 }
