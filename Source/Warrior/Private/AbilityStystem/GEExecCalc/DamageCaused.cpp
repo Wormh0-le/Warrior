@@ -43,6 +43,7 @@ UDamageCaused::UDamageCaused()
 	// RelevantAttributesToCapture.Add(AttackPowerCaptureDef);
 	RelevantAttributesToCapture.Add(GetWarriorDamageCapture().AttackPowerDef);
 	RelevantAttributesToCapture.Add(GetWarriorDamageCapture().DefencePowerDef);
+	RelevantAttributesToCapture.Add(GetWarriorDamageCapture().OutputDamageDef);
 }
 
 void UDamageCaused::Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams,
@@ -64,7 +65,7 @@ void UDamageCaused::Execute_Implementation(const FGameplayEffectCustomExecutionP
 		EvaluateParameters,
 		SourceAttackPower
 	);
-	Debug::Print(TEXT("SourceAttackPower"), SourceAttackPower);
+	// Debug::Print(TEXT("SourceAttackPower"), SourceAttackPower);
 
 	float BaseDamage = 0.f;
 	int32 LightAttackComboCount = 0;
@@ -75,17 +76,17 @@ void UDamageCaused::Execute_Implementation(const FGameplayEffectCustomExecutionP
 		if (TagMagnitude.Key.MatchesTagExact(WarriorGameplayTags::Shared_SetByCaller_BaseDamage))
 		{
 			BaseDamage = TagMagnitude.Value;
-			Debug::Print(TEXT("BaseDamage"), BaseDamage);
+			// Debug::Print(TEXT("BaseDamage"), BaseDamage);
 		}
 		if (TagMagnitude.Key.MatchesTagExact(WarriorGameplayTags::Player_SetByCaller_AttackType_Light))
 		{
 			LightAttackComboCount = TagMagnitude.Value;
-			Debug::Print(TEXT("LightAttackComboCount"), LightAttackComboCount);
+			// Debug::Print(TEXT("LightAttackComboCount"), LightAttackComboCount);
 		}
 		if (TagMagnitude.Key.MatchesTagExact(WarriorGameplayTags::Player_SetByCaller_AttackType_Heavy))
 		{
 			HeavyAttackComboCount = TagMagnitude.Value;
-			Debug::Print(TEXT("HeavyAttackComboCount"), HeavyAttackComboCount);
+			// Debug::Print(TEXT("HeavyAttackComboCount"), HeavyAttackComboCount);
 		}
 	}
 
@@ -95,18 +96,18 @@ void UDamageCaused::Execute_Implementation(const FGameplayEffectCustomExecutionP
 		EvaluateParameters,
 		TargetDefencePower
 	);
-	Debug::Print(TEXT("TargetDefencePower"), TargetDefencePower);
+	// Debug::Print(TEXT("TargetDefencePower"), TargetDefencePower);
 	
 	const float DamageIncreasePercentLight = LightAttackComboCount * 0.05f + 1.f;
 	BaseDamage *= DamageIncreasePercentLight;
-	Debug::Print(TEXT("DamageIncreasePercentLight"), DamageIncreasePercentLight);
+	// Debug::Print(TEXT("DamageIncreasePercentLight"), DamageIncreasePercentLight);
 	
 	const float DamageIncreasePercentHeavy = HeavyAttackComboCount * 0.15f + 1.12f;
 	BaseDamage *= DamageIncreasePercentHeavy;
-	Debug::Print(TEXT("DamageIncreasePercentHeavy"), DamageIncreasePercentHeavy);
+	// Debug::Print(TEXT("DamageIncreasePercentHeavy"), DamageIncreasePercentHeavy);
 	
 	const float FinalDamage = BaseDamage * SourceAttackPower / TargetDefencePower;
-	Debug::Print(TEXT("FinalDamage"), FinalDamage);
+	// Debug::Print(TEXT("FinalDamage"), FinalDamage);
 	if (FinalDamage > 0.f)
 	{
 		OutExecutionOutput.AddOutputModifier(
