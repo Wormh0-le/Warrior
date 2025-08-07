@@ -11,6 +11,10 @@
 
 #include "WarriorDebugHelper.h"
 
+#include "Components/WidgetComponent.h"
+
+#include "Widgets/WarriorWidget.h"
+
 
 // Sets default values
 AWarriorEnemyCharacter::AWarriorEnemyCharacter()
@@ -31,6 +35,18 @@ AWarriorEnemyCharacter::AWarriorEnemyCharacter()
 	EnemyCombatComponent = CreateDefaultSubobject<UEnemyCombatComponent>(TEXT("EnemyCombatComponent"));
 
 	EnemyUIComponent = CreateDefaultSubobject<UEnemyUIComponent>(TEXT("EnemyUIComponent"));
+
+	EnemyHealthWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("EnemyHealthWidgetComponent"));
+	EnemyHealthWidgetComponent->SetupAttachment(GetMesh());
+}
+
+void AWarriorEnemyCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	if (UWarriorWidget* HealthWidget = Cast<UWarriorWidget>(EnemyHealthWidgetComponent->GetUserWidgetObject()))
+	{
+		HealthWidget->InitEnemyUIComponent(this);
+	}
 }
 
 void AWarriorEnemyCharacter::PossessedBy(AController* NewController)
