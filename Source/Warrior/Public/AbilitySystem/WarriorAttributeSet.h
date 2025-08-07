@@ -5,15 +5,17 @@
 #include "CoreMinimal.h"
 #include "Warrior/Public/AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "AttributeSet.h"
-
+#include "UObject/WeakInterfacePtr.h"
 #include "WarriorAttributeSet.generated.h"
 
+class IPawnUIInterface;
 
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
 GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
 GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
 GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
+
 /**
  * 
  */
@@ -54,4 +56,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Damage")
 	FGameplayAttributeData OutputDamage;
 	ATTRIBUTE_ACCESSORS(UWarriorAttributeSet, OutputDamage)
+
+private:
+	TWeakInterfacePtr<IPawnUIInterface> PawnUIInterface;
 };

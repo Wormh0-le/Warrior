@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 
 #include "Interfaces/PawnCombatInterface.h"
+#include "Interfaces/PawnUIInterface.h"
 
 #include "WarriorBaseCharacter.generated.h"
 
@@ -15,7 +16,7 @@ class UWarriorAttributeSet;
 class UWarriorAbilitySystemComponent;
 
 UCLASS()
-class WARRIOR_API AWarriorBaseCharacter : public ACharacter, public IAbilitySystemInterface, public IPawnCombatInterface
+class WARRIOR_API AWarriorBaseCharacter : public ACharacter, public IAbilitySystemInterface, public IPawnCombatInterface, public IPawnUIInterface
 {
 	GENERATED_BODY()
 
@@ -30,6 +31,10 @@ public:
 	//~ Begin PawnCombatInterface Interface.
 	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
 	//~ End PawnCombatInterface Interface.
+
+	//~ Begin PawnUIInterface Interface.
+	virtual UPawnUIComponent* GetPawnUIComponent() const override;
+	//~ End PawnUIInterface Interface.
 protected:
 	//~ Begin APawn Interface.
 	virtual void PossessedBy(AController* NewController) override;

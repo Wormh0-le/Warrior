@@ -1,7 +1,7 @@
 // Advanced Action RPG Learning, Wormhole All Rights Reserved
 
 
-#include "AbilityStystem/GEExecCalc/DamageCaused.h"
+#include "AbilitySystem/GEExecCalc/DamageCaused.h"
 
 #include "WarriorDebugHelper.h"
 #include "WarriorGameplayTags.h"
