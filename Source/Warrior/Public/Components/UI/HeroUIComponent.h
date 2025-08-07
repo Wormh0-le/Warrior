@@ -6,6 +6,7 @@
 #include "PawnUIComponent.h"
 #include "HeroUIComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEquippedWeaponChangedDelegate, TSoftObjectPtr<UTexture2D>, SoftWeaponIconTexture);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class WARRIOR_API UHeroUIComponent : public UPawnUIComponent
@@ -15,4 +16,7 @@ class WARRIOR_API UHeroUIComponent : public UPawnUIComponent
 public:
 	UPROPERTY(BlueprintAssignable)
 	FOnPercentChangedDelegate OnRageChanged;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnEquippedWeaponChangedDelegate OnEquippedWeaponChanged;
 };
