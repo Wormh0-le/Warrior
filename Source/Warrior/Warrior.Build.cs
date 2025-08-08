@@ -19,7 +19,8 @@ public class Warrior : ModuleRules
 			"GameplayTags",
 			"GameplayTasks",
 			"GameplayAbilities",
-			"StateTreeEditorModule",
+			"GameplayStateTreeModule",
+			"StateTreeModule",
 			"AIModule"
 		});
 

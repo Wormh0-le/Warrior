@@ -6,6 +6,7 @@
 #include "AIController.h"
 #include "WarriorAIController.generated.h"
 
+class UStateTreeAIComponent;
 struct FAIStimulus;
 class UAISenseConfig_Sight;
 
@@ -16,6 +17,8 @@ class WARRIOR_API AWarriorAIController : public AAIController
 
 public:
 	AWarriorAIController(const FObjectInitializer& ObjectInitializer);
+	
+	virtual void BeginPlay() override;
 
 	//~ Begin IGenericTeamAgentInterface
 	virtual ETeamAttitude::Type GetTeamAttitudeTowards(const AActor& Other) const override;
@@ -27,6 +30,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UAISenseConfig_Sight* EnemySenseConfigSight;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStateTreeAIComponent* EnemyStateTreeAIComponent;
 
 	UFUNCTION()
 	virtual void OnEnemyPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);

@@ -3,6 +3,9 @@
 
 #include "Controllers/WarriorAIController.h"
 
+#include "StateTreeSchema.h"
+#include "WarriorGameplayTags.h"
+#include "Components/StateTreeAIComponent.h"
 #include "Navigation/CrowdFollowingComponent.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
@@ -12,9 +15,7 @@ AWarriorAIController::AWarriorAIController(const FObjectInitializer& ObjectIniti
 	:Super(ObjectInitializer.SetDefaultSubobjectClass<UCrowdFollowingComponent>("PathFollowingComponent"))
 {
 	if (UCrowdFollowingComponent* CrowdComp = Cast<UCrowdFollowingComponent>(GetPathFollowingComponent()))
-	{
-		
-	}
+
 	EnemySenseConfigSight = CreateDefaultSubobject<UAISenseConfig_Sight>("EnemySenseConfigSight");
 	EnemySenseConfigSight->DetectionByAffiliation.bDetectEnemies = true;
 	EnemySenseConfigSight->DetectionByAffiliation.bDetectFriendlies = false;
@@ -29,6 +30,18 @@ AWarriorAIController::AWarriorAIController(const FObjectInitializer& ObjectIniti
 	EnemyPerceptionComponent->OnTargetPerceptionUpdated.AddUniqueDynamic(this, &ThisClass::OnEnemyPerceptionUpdated);
 
 	SetGenericTeamId(FGenericTeamId(1));
+
+	EnemyStateTreeAIComponent = CreateDefaultSubobject<UStateTreeAIComponent>("EnemyStateTreeAIComponent");
+	EnemyStateTreeAIComponent->SetStartLogicAutomatically(false);
+}
+
+void AWarriorAIController::BeginPlay()
+{
+	Super::BeginPlay();
+	if (EnemyStateTreeAIComponent->GetSchema())
+	{
+		EnemyStateTreeAIComponent->StartLogic();
+	}
 }
 
 ETeamAttitude::Type AWarriorAIController::GetTeamAttitudeTowards(const AActor& Other) const
@@ -46,6 +59,12 @@ void AWarriorAIController::OnEnemyPerceptionUpdated(AActor* Actor, FAIStimulus S
 {
 	if (Stimulus.WasSuccessfullySensed() && Actor)
 	{
-		
+		if (EnemyStateTreeAIComponent->GetSchema())
+		{
+			FStateTreeEvent Event;
+			Event.Tag = WarriorGameplayTags::Enemy_Status_Alert;
+			Event.Payload = FInstancedStruct::Make(FVector(Actor->GetActorLocation()));
+			EnemyStateTreeAIComponent->SendStateTreeEvent(Event);	
+		}
 	}
 }
