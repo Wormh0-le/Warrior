@@ -11,6 +11,7 @@
 
 #include "WarriorBaseCharacter.generated.h"
 
+class UMotionWarpingComponent;
 class UDataAsset_StartupDataBase;
 class UWarriorAttributeSet;
 class UWarriorAbilitySystemComponent;
@@ -45,6 +46,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
 	UWarriorAttributeSet* WarriorAttributeSet;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Motion Warping")
+	UMotionWarpingComponent* MotionWarpingComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Default|CharacterData")
 	TSoftObjectPtr<UDataAsset_StartupDataBase> CharacterStartupData;
