@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Warrior/Public/AbilitySystem/Abilities/WarriorGameplayAbility.h"
+#include "WarriorGameplayAbility.h"
 #include "WarriorEnemyGameplayAbility.generated.h"
 
 class UEnemyCombatComponent;
@@ -23,6 +23,8 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
 	UEnemyCombatComponent* GetEnemyCombatComponentFromActorInfo();
 
+	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+	FGameplayEffectSpecHandle MakeEnemyDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> DamageEffectClass, const FScalableFloat& InDamageScalableFloat);
 private:
 	TWeakObjectPtr<AWarriorEnemyCharacter> CachedWarriorEnemyCharacter;
 };

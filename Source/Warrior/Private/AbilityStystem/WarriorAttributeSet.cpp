@@ -1,7 +1,7 @@
 // Advanced Action RPG Learning, Wormhole All Rights Reserved
 
 
-#include "Warrior/Public/AbilitySystem/WarriorAttributeSet.h"
+#include "AbilitySystem/WarriorAttributeSet.h"
 
 #include "GameplayEffectExtension.h"
 #include "WarriorFunctionLibrary.h"

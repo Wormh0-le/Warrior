@@ -3,7 +3,7 @@
 
 #include "Widgets/WarriorWidget.h"
 
-#include "Warrior/Public/Components/UI/HeroUIComponent.h"
+#include "Components/UI/HeroUIComponent.h"
 #include "Interfaces/PawnUIInterface.h"
 
 

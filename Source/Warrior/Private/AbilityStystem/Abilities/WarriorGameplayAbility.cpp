@@ -1,11 +1,11 @@
 // Advanced Action RPG Learning, Wormhole All Rights Reserved
 
 
-#include "Warrior/Public/AbilitySystem/Abilities/WarriorGameplayAbility.h"
+#include "AbilitySystem/Abilities/WarriorGameplayAbility.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
-#include "Warrior/Public/AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "Components/Combat/PawnCombatComponent.h"
 #include "WarriorTypes/WarriorEnumTypes.h"
 

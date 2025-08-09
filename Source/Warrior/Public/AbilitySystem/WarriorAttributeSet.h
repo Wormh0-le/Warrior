@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Warrior/Public/AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "WarriorAbilitySystemComponent.h"
 #include "AttributeSet.h"
 #include "UObject/WeakInterfacePtr.h"
 #include "WarriorAttributeSet.generated.h"

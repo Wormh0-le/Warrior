@@ -3,6 +3,8 @@
 
 #include "Items/Weapons/WarriorWeaponBase.h"
 
+#include "WarriorFunctionLibrary.h"
+
 #include "Components/BoxComponent.h"
 
 
@@ -46,11 +48,10 @@ void AWarriorWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* Overlappe
 	checkf(WeaponOwningPawn, TEXT("Forgot to assign an instigator as the owning pawn for the weapon: %s"), *GetName());
 	if (APawn* HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (HitPawn != WeaponOwningPawn)
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn, HitPawn))
 		{
 			OnWeaponEndHitTarget.ExecuteIfBound(OtherActor);
 		}
-		//TODO: hit enemy character
 	}
 }
 
