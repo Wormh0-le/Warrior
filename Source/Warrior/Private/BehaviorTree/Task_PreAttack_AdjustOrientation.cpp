@@ -56,7 +56,6 @@ EBTNodeResult::Type UTask_PreAttack_AdjustOrientation::ExecuteTask(UBehaviorTree
 
 	FPreAttackTaskMemory* Memory = CastInstanceNodeMemory<FPreAttackTaskMemory>(NodeMemory);
 	check(Memory);
-	Memory->Reset();
 	
 	APawn* OwningPawn = AIController->GetPawn();
 	UObject* ActorObject = OwnerComp.GetBlackboardComponent()->GetValueAsObject(InTargetActorKey.SelectedKeyName);
@@ -70,6 +69,7 @@ EBTNodeResult::Type UTask_PreAttack_AdjustOrientation::ExecuteTask(UBehaviorTree
 	{
 		if (HasReachedTargetAngleWithTolerance(OwningPawn, TargetActor))
 		{
+			Memory->Reset();
 			Result = EBTNodeResult::Succeeded;
 		} else {
 			Result = EBTNodeResult::InProgress;
@@ -101,7 +101,7 @@ void UTask_PreAttack_AdjustOrientation::TickTask(UBehaviorTreeComponent& OwnerCo
 bool UTask_PreAttack_AdjustOrientation::HasReachedTargetAngleWithTolerance(APawn* QueryPawn, AActor* TargetActor) const
 {
 	const FVector OwnerForward = QueryPawn->GetActorForwardVector();
-	const FVector OwnerToTargetNormalized = (TargetActor->GetActorLocation() - QueryPawn->GetActorLocation());
+	const FVector OwnerToTargetNormalized = (TargetActor->GetActorLocation() - QueryPawn->GetActorLocation()).GetSafeNormal();
 	const float DotResult = FVector::DotProduct(OwnerForward, OwnerToTargetNormalized);
 	const float AngleDiff = UKismetMathLibrary::DegAcos(DotResult);
 	return AngleDiff <= AnglePrecision;
