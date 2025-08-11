@@ -43,4 +43,7 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "Warrior| FunctionLibrary")
 	static FGameplayTag ComputeHitReactionDirectionTag(AActor* Attacker, AActor* Victim, float& OutAngleDegrees);
+
+	UFUNCTION(BlueprintPure, Category = "Warrior| FunctionLibrary")
+	static bool IsValidBlock(AActor* Attacker, AActor* Defender);
 };

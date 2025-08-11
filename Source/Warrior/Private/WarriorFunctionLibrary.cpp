@@ -106,5 +106,14 @@ FGameplayTag UWarriorFunctionLibrary::ComputeHitReactionDirectionTag(AActor* Att
 	return HitReactionDirectionTag;
 }
 
+bool UWarriorFunctionLibrary::IsValidBlock(AActor* Attacker, AActor* Defender)
+{
+	check(Attacker && Defender);
+
+	const float DotResult = FVector::DotProduct(Attacker->GetActorForwardVector(), Defender->GetActorForwardVector());
+
+	return DotResult < -.1f;
+}
+
 
 

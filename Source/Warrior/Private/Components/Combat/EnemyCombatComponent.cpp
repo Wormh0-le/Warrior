@@ -5,20 +5,22 @@
 
 #include "WarriorGameplayTags.h"
 #include "AbilitySystemBlueprintLibrary.h"
+#include "WarriorFunctionLibrary.h"
 
 
 void UEnemyCombatComponent::OnWeaponHitTargetActor(AActor* TargetActor)
 {
 	if (OverlappedActors.Contains(TargetActor))	return;
 	OverlappedActors.AddUnique(TargetActor);
+
 	bool bIsValidBlock = false;
 
-	const bool bIsPlayerBlocking = false;
+	const bool bIsPlayerBlocking = UWarriorFunctionLibrary::NativeDoesActorHasTag(TargetActor, WarriorGameplayTags::Player_Status_Blocking);
 	const bool bIsAttackUnblockable = false;
 
 	if (bIsPlayerBlocking && !bIsAttackUnblockable)
 	{
-		//TODO: check if the block is valid
+		bIsValidBlock = UWarriorFunctionLibrary::IsValidBlock(GetOwningPawn(), TargetActor);
 	}
 
 	FGameplayEventData EventData;
@@ -26,7 +28,11 @@ void UEnemyCombatComponent::OnWeaponHitTargetActor(AActor* TargetActor)
 	EventData.Target = TargetActor;
 	if (bIsValidBlock)
 	{
-		//TODO: Handle successful block
+		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
+			TargetActor,
+			WarriorGameplayTags::Player_Event_SuccessfulBlock,
+			EventData
+		);
 	}
 	else
 	{
