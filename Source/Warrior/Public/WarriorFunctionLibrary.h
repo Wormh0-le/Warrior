@@ -40,4 +40,7 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "Warrior| FunctionLibrary")
 	static bool IsTargetPawnHostile(APawn* QueryPawn, APawn* TargetPawn);
+
+	UFUNCTION(BlueprintPure, Category = "Warrior| FunctionLibrary")
+	static FGameplayTag ComputeHitReactionDirectionTag(AActor* Attacker, AActor* Victim, float& OutAngleDegrees);
 };

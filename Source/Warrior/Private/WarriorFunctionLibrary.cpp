@@ -5,6 +5,7 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "GenericTeamAgentInterface.h"
+#include "WarriorGameplayTags.h"
 
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "Interfaces/PawnCombatInterface.h"
@@ -74,6 +75,35 @@ bool UWarriorFunctionLibrary::IsTargetPawnHostile(APawn* QueryPawn, APawn* Targe
 		return QueryTeamAgent->GetGenericTeamId() != TargetTeamAgent->GetGenericTeamId();
 	}
 	return false;
+}
+
+FGameplayTag UWarriorFunctionLibrary::ComputeHitReactionDirectionTag(AActor* Attacker, AActor* Victim, float& OutAngleDegrees)
+{
+	check(Attacker && Victim);
+	const FVector VictimFrontNormalized = Victim->GetActorForwardVector().GetSafeNormal();
+	const FVector VictimToAttackerNormalized = (Attacker->GetActorLocation() - Victim->GetActorLocation()).GetSafeNormal();
+	const float DotProduct = FVector::DotProduct(VictimFrontNormalized, VictimToAttackerNormalized);
+	OutAngleDegrees = FMath::Acos(DotProduct) * (180.f / PI);
+	const FVector CrossProduct = FVector::CrossProduct(VictimFrontNormalized, VictimToAttackerNormalized);
+	if (CrossProduct.Z < 0.f)
+	{
+		OutAngleDegrees *= -1.f; 
+	}
+	FGameplayTag HitReactionDirectionTag = WarriorGameplayTags::Shared_Status_HitReact_Front;
+	if (OutAngleDegrees >= -45.f && OutAngleDegrees < 45.f)
+	{
+		HitReactionDirectionTag = WarriorGameplayTags::Shared_Status_HitReact_Front;
+	} else if (OutAngleDegrees >= 45.f && OutAngleDegrees < 135.f)
+	{
+		HitReactionDirectionTag = WarriorGameplayTags::Shared_Status_HitReact_Right;
+	} else if (OutAngleDegrees >= -135.f && OutAngleDegrees < -45.f)
+	{ 
+		HitReactionDirectionTag = WarriorGameplayTags::Shared_Status_HitReact_Left;
+	} else if (OutAngleDegrees >= 135.f || OutAngleDegrees < -135.f)
+	{
+		HitReactionDirectionTag = WarriorGameplayTags::Shared_Status_HitReact_Back;
+	}
+	return HitReactionDirectionTag;
 }
 
 
