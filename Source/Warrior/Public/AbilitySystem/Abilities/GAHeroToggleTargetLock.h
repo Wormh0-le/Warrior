@@ -6,6 +6,8 @@
 #include "AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
 #include "GAHeroToggleTargetLock.generated.h"
 
+class UInputMappingContext;
+class UWarriorWidget;
 /**
  * 
  */
@@ -24,6 +26,23 @@ private:
 	void TryLockOnTarget();
 	void GetAvailableActorsToLock();
 
+	void DrawTargetLockWidget();
+	void SetTargetLockWidgetPosition();
+
+	UFUNCTION(BlueprintCallable)
+	void OnTargetLockTick(float DeltaTime);
+
+	AActor* GetLockTargetFromAvailableActors(const TArray<AActor*>& InAvailable);
+
+	void CancelTargetLockAbility();
+	void CleanUp();
+
+	void InitTargetLockMovement();
+	void ResetTargetLockMovement();
+
+	void InitTargetLockMappingContext();
+	void ResetTargetLockMappingContext();
+
 	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
 	float BoxTraceDistance = 5000.f;
 
@@ -36,6 +55,30 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
 	bool bShowPersistentDebugShape = false;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
+	TSubclassOf<UWarriorWidget> TargetLockWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
+	float TargetLockRotationInterpSpeed = 5.f;
+
+	UPROPERTY()
+	FVector2D TargetWidgetSize = FVector2D::ZeroVector;
+
+	UPROPERTY()
+	TObjectPtr<UWarriorWidget> TargetLockWidget;
+
 	UPROPERTY()
 	TArray<AActor*> AvailableActorsToLock;
+
+	UPROPERTY()
+	AActor* CurrentLockedActor;
+
+	UPROPERTY()
+	float DefaultMaxWalkSpeed = 0.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
+	float TargetLockMovementMaxWalkSpeed = 150.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
+	UInputMappingContext* TargetLockInputMappingContext;
 };
