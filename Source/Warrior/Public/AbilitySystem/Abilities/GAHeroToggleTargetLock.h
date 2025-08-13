@@ -64,6 +64,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
 	float TargetLockRotationInterpSpeed = 5.f;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
+	float TargetLockCameraOffset = 20.f;
 
 	UPROPERTY()
 	FVector2D TargetWidgetSize = FVector2D::ZeroVector;

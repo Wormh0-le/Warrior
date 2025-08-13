@@ -127,7 +127,7 @@ void UGAHeroToggleTargetLock::GetAvailableActorsAroundTarget(TArray<AActor*>& Ou
 
 	for (AActor* AvailableActor : AvailableActorsToLock)
 	{
-			if (!AvailableActor || AvailableActor == CurrentLockedActor)	continue;
+		if (!AvailableActor || AvailableActor == CurrentLockedActor)	continue;
 		const FVector PlayerToAvailableNormalized = (AvailableActor->GetActorLocation() - playerLocation).GetSafeNormal();
 		const FVector CrossProduct = FVector::CrossProduct(PlayerCurrentNormalized, PlayerToAvailableNormalized);
 		if (CrossProduct.Z > 0)
@@ -199,10 +199,11 @@ void UGAHeroToggleTargetLock::OnTargetLockTick(float DeltaTime)
 		!UWarriorFunctionLibrary::NativeDoesActorHasTag(HeroCharacter, WarriorGameplayTags::Player_Status_Blocking);
 	if (bShouldOverrideRotation)
 	{
-		const FRotator LookAtRot = UKismetMathLibrary::FindLookAtRotation(
+		FRotator LookAtRot = UKismetMathLibrary::FindLookAtRotation(
 			HeroCharacter->GetActorLocation(),
 			CurrentLockedActor->GetActorLocation()
 		);
+		LookAtRot -= FRotator(TargetLockCameraOffset, 0.f, 0.f); 
 		const FRotator CurrentControlRot = GetHeroControllerFromActorInfo()->GetControlRotation();
 		FRotator TargetControlRot = FMath::RInterpTo(CurrentControlRot, LookAtRot, DeltaTime, TargetLockRotationInterpSpeed);
 		GetHeroControllerFromActorInfo()->SetControlRotation(FRotator(TargetControlRot.Pitch, TargetControlRot.Yaw, CurrentControlRot.Roll));
