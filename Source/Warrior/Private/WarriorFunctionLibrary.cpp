@@ -115,5 +115,15 @@ bool UWarriorFunctionLibrary::IsValidBlock(AActor* Attacker, AActor* Defender)
 	return DotResult < -.1f;
 }
 
+bool UWarriorFunctionLibrary::ApplayGameplayEffectSpecHandleToTarget(AActor* InInstigator, AActor* InTargetActor,
+	const FGameplayEffectSpecHandle& InSpecHandle)
+{
+	UAbilitySystemComponent* SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(InInstigator);
+	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(InTargetActor);
+
+	FActiveGameplayEffectHandle ActiveHandle = SourceASC->ApplyGameplayEffectSpecToTarget(*InSpecHandle.Data, TargetASC);
+	return ActiveHandle.WasSuccessfullyApplied();
+}
+
 
 

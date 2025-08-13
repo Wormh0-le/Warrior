@@ -17,7 +17,6 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
-
 #include "WarriorDebugHelper.h"
 
 
