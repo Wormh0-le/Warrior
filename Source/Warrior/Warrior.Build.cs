@@ -23,7 +23,8 @@ public class Warrior : ModuleRules
 			"StateTreeModule",
 			"AIModule",
 			"MotionWarping",
-			"Niagara"
+			"Niagara",
+			"NavigationSystem"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "AnimGraphRuntime" });

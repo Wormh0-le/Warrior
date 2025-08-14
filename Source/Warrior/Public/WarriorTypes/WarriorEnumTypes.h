@@ -20,3 +20,20 @@ enum class EWarriorSuccessType : uint8
 	Success,
 	Fail,
 };
+
+UENUM(BlueprintType)
+enum class EWarriorDecoratorType : uint8
+{
+	IsLessThan,
+	IsLessThanOrEqualTo,
+	EqualTo,
+	IsGreaterThanOrEqualTo,
+	IsGreaterThan,
+};
+
+UENUM(BlueprintType)
+enum class EWarriorAbilityActivationPolicy : uint8
+{
+	OnTriggered,
+	OnGiven
+};

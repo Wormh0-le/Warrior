@@ -4,18 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/GameplayAbility.h"
+#include "WarriorTypes/WarriorEnumTypes.h"
 #include "WarriorGameplayAbility.generated.h"
 
-enum class EWarriorSuccessType : uint8;
+
 class UWarriorAbilitySystemComponent;
 class UPawnCombatComponent;
-
-UENUM(BlueprintType)
-enum class EWarriorAbilityActivationPolicy : uint8
-{
-	OnTriggered,
-	OnGiven
-};
 
 /**
  * 
