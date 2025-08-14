@@ -11,6 +11,7 @@
 
 #include "WarriorBaseCharacter.generated.h"
 
+class UBoxComponent;
 class UMotionWarpingComponent;
 class UDataAsset_StartupDataBase;
 class UWarriorAttributeSet;
@@ -53,7 +54,26 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Default|CharacterData")
 	TSoftObjectPtr<UDataAsset_StartupDataBase> CharacterStartupData;
 
+#if WITH_EDITOR
+	//~ Begin UObject Interface
+	virtual void PostEditChangeProperty( struct FPropertyChangedEvent& PropertyChangedEvent) override;
+	//~ End UObject Interface
+#endif
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat|Collision")
+	UBoxComponent* LeftHandCollisionBox;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat|Collision")
+	UBoxComponent* RightHandCollisionBox;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat|Collision")
+	FName LeftHandBoneName;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat|Collision")
+	FName RightHandBoneName;
 public:
 	FORCEINLINE UWarriorAbilitySystemComponent* GetWarriorAbilitySystemComponent() const { return WarriorAbilitySystemComponent; }
 	FORCEINLINE UWarriorAttributeSet* GetWarriorAttributeSet() const { return WarriorAttributeSet; }
+	FORCEINLINE UBoxComponent* GetLeftHandCollisionBox() const { return LeftHandCollisionBox; }
+	FORCEINLINE UBoxComponent* GetRightHandCollisionBox() const { return RightHandCollisionBox; }
 };

@@ -7,6 +7,8 @@
 
 #include "WarriorDebugHelper.h" 
 
+#include "Characters/WarriorBaseCharacter.h"
+
 
 void UPawnCombatComponent::RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister,
 	AWarriorWeaponBase* InWeaponToRegister, bool bRegisterAsEquippedWeapon)
@@ -59,19 +61,35 @@ AWarriorWeaponBase* UPawnCombatComponent::GetCharacterCurrentEquippedWeapon() co
 
 void UPawnCombatComponent::ToggleWeaponCollision(bool bEnableCollision, EToggleDamageType ToggleDamageType)
 {
+	UBoxComponent* BoxToToggle = nullptr;
 	if (ToggleDamageType == EToggleDamageType::CurrentEquippedWeapon)
 	{
 		AWarriorWeaponBase* WeaponToToggle = GetCharacterCurrentEquippedWeapon();
 		check(WeaponToToggle);
-		if (bEnableCollision)
-		{
-			WeaponToToggle->GetWeaponCollisionBox()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);	
-		}
-		else
-		{
-			WeaponToToggle->GetWeaponCollisionBox()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-			OverlappedActors.Empty();
-		}
+		BoxToToggle = WeaponToToggle->GetWeaponCollisionBox();
+	}
+	else if (ToggleDamageType == EToggleDamageType::LeftHand)
+	{
+		BoxToToggle = GetOwningPawn<AWarriorBaseCharacter>()->GetLeftHandCollisionBox();
+	}
+	else if (ToggleDamageType == EToggleDamageType::RightHand)
+	{
+		BoxToToggle = GetOwningPawn<AWarriorBaseCharacter>()->GetRightHandCollisionBox();
+	}
+	check(BoxToToggle);
+	ToggleBoxCollsion(BoxToToggle, bEnableCollision);
+}
+
+void UPawnCombatComponent::ToggleBoxCollsion(UBoxComponent* Box, bool bEnableCollision)
+{
+	if (bEnableCollision)
+	{
+		Box->SetCollisionEnabled(ECollisionEnabled::QueryOnly);	
+	}
+	else
+	{
+		Box->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		OverlappedActors.Empty();
 	}
 }
 

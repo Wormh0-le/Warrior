@@ -7,6 +7,8 @@
 #include "Components/PawnExtensionComponentBase.h"
 #include "PawnCombatComponent.generated.h"
 
+class UBoxComponent;
+
 UENUM(BlueprintType)
 enum class EToggleDamageType : uint8
 {
@@ -37,6 +39,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
 	void ToggleWeaponCollision(bool bEnableCollision, EToggleDamageType ToggleDamageType = EToggleDamageType::CurrentEquippedWeapon);
+
+	void ToggleBoxCollsion(UBoxComponent* Box, bool bEnableCollision);
 
 	virtual void OnWeaponHitTargetActor(AActor* TargetActor);
 	virtual void OnWeaponPullback(AActor* TargetActor);

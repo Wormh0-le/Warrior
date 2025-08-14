@@ -7,21 +7,19 @@
 #include "EnemyUIComponent.generated.h"
 
 
+class UWarriorWidget;
+
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class WARRIOR_API UEnemyUIComponent : public UPawnUIComponent
 {
 	GENERATED_BODY()
-
 public:
-	// Sets default values for this component's properties
-	UEnemyUIComponent();
+	UFUNCTION(BlueprintCallable)
+	void RegisterWidget(UWarriorWidget* InWidgetToRegister);
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
-		FActorComponentTickFunction* ThisTickFunction) override;
+	UFUNCTION(BlueprintCallable)
+	void UnregisterEnemyOwnedWidgets();
+private:
+	UPROPERTY()
+	TArray<UWarriorWidget*> EnemyOwnedWidgets;
 };

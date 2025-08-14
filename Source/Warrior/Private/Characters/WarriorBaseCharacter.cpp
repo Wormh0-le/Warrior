@@ -6,6 +6,7 @@
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "AbilitySystem/WarriorAttributeSet.h"
 #include "MotionWarpingComponent.h"
+#include "Components/BoxComponent.h"
 
 
 // Sets default values
@@ -47,6 +48,20 @@ void AWarriorBaseCharacter::PossessedBy(AController* NewController)
 	{
 		WarriorAbilitySystemComponent->InitAbilityActorInfo(this, this);
 		ensureMsgf(!CharacterStartupData.IsNull(), TEXT("Forgot to assign start up data to %s"), *GetName());
+	}
+}
+
+void AWarriorBaseCharacter::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+	if (PropertyChangedEvent.GetMemberPropertyName() == GET_MEMBER_NAME_CHECKED(ThisClass, LeftHandBoneName))
+	{
+		LeftHandCollisionBox->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, LeftHandBoneName);
+	}
+	if (PropertyChangedEvent.GetMemberPropertyName() == GET_MEMBER_NAME_CHECKED(ThisClass, RightHandBoneName))
+	{
+		RightHandCollisionBox->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, RightHandBoneName);
 	}
 }
 

@@ -8,12 +8,12 @@
 #include "Engine/AssetManager.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/UI/EnemyUIComponent.h"
+#include "Components/WidgetComponent.h"
+#include "Widgets/WarriorWidget.h"
+#include "Components/BoxComponent.h"
 
 #include "WarriorDebugHelper.h"
-
-#include "Components/WidgetComponent.h"
-
-#include "Widgets/WarriorWidget.h"
+#include "WarriorFunctionLibrary.h"
 
 
 // Sets default values
@@ -38,6 +38,17 @@ AWarriorEnemyCharacter::AWarriorEnemyCharacter()
 
 	EnemyHealthWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("EnemyHealthWidgetComponent"));
 	EnemyHealthWidgetComponent->SetupAttachment(GetMesh());
+
+	LeftHandCollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("LeftHandCollisionBox"));
+	LeftHandCollisionBox->SetupAttachment(GetMesh());
+	LeftHandCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	LeftHandCollisionBox->OnComponentBeginOverlap.AddUniqueDynamic(this, &ThisClass::OnCollisionBoxBeginOverlap);
+
+	RightHandCollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("RightHandCollisionBox"));
+	RightHandCollisionBox->SetupAttachment(GetMesh());
+	RightHandCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	RightHandCollisionBox->OnComponentBeginOverlap.AddUniqueDynamic(this, &ThisClass::OnCollisionBoxBeginOverlap);
+	
 }
 
 void AWarriorEnemyCharacter::BeginPlay()
@@ -85,5 +96,17 @@ void AWarriorEnemyCharacter::InitEnemyStartupData()
 			}
 		)
 	);
+}
+
+void AWarriorEnemyCharacter::OnCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (APawn* HitPawn = Cast<APawn>(OtherActor))
+	{
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(this, HitPawn))
+		{
+			EnemyCombatComponent->OnWeaponHitTargetActor(HitPawn);
+		}
+	}
 }
 
