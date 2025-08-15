@@ -60,6 +60,9 @@ protected:
 	UNiagaraComponent* ProjectileImpactComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile|Impact")
+	USoundCue* ProjectileSpawnSound;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile|Impact")
 	USoundCue* ProjectileImpactSound;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile|Fly")

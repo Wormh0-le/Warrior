@@ -54,6 +54,14 @@ void AWarriorProjectile::BeginPlay()
 	{
 		ProjectileCollisionBox->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	}
+	if (ProjectileSpawnSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(
+			this,
+			ProjectileSpawnSound,
+			GetActorLocation()
+		);	
+	}
 	if (ProjectileMuzzleFX)
 	{
 		UNiagaraFunctionLibrary::SpawnSystemAtLocation(
