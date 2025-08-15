@@ -84,4 +84,6 @@ protected:
 	FGameplayEffectSpecHandle ProjectileDamageEffectSpecHandle;
 private:
 	void ApplyProjectileDamage(APawn* HitPawn, const FGameplayEventData& InPayload);
+
+	TArray<AActor*> OverlappedActors;
 };

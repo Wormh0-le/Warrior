@@ -94,13 +94,9 @@ void AWarriorProjectile::BeginPlay()
 void AWarriorProjectile::OnProjectileHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	FVector NormalImpulse, const FHitResult& Hit)
 {
-	SpawnHitFXEffect();
 	APawn* HitPawn = Cast<APawn>(OtherActor);
-	if (!HitPawn || !UWarriorFunctionLibrary::IsTargetPawnHostile(GetInstigator(), HitPawn))
-	{
-		Destroy();
-		return;
-	}
+	if (!HitPawn || !UWarriorFunctionLibrary::IsTargetPawnHostile(GetInstigator(), HitPawn))	return;
+	SpawnHitFXEffect();
 	bool bIsValidBlock = false;
 	const bool bIsPlayerBlocking = UWarriorFunctionLibrary::NativeDoesActorHasTag(HitPawn, WarriorGameplayTags::Player_Status_Blocking);
 	if (bIsPlayerBlocking)
@@ -108,12 +104,12 @@ void AWarriorProjectile::OnProjectileHit(UPrimitiveComponent* HitComponent, AAct
 		bIsValidBlock = UWarriorFunctionLibrary::IsValidBlock(GetInstigator(), HitPawn);
 	}
 	FGameplayEventData EventData;
-	EventData.Instigator = this;
+	EventData.Instigator = GetInstigator();
 	EventData.Target = HitPawn;
 	if (bIsValidBlock)
 	{
 		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
-			this,
+			HitPawn,
 			WarriorGameplayTags::Player_Event_SuccessfulBlock,
 			EventData
 		);
@@ -128,6 +124,18 @@ void AWarriorProjectile::OnProjectileHit(UPrimitiveComponent* HitComponent, AAct
 void AWarriorProjectile::OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	if (OverlappedActors.Contains(OtherActor))	return;
+	OverlappedActors.Add(OtherActor);
+	if (APawn* HitPawn = Cast<APawn>(OtherActor))
+	{
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(GetInstigator(), HitPawn))
+		{
+			FGameplayEventData EventData;
+			EventData.Instigator = GetInstigator();
+			EventData.Target = HitPawn;
+			ApplyProjectileDamage(HitPawn, EventData);
+		}
+	}
 }
 
 void AWarriorProjectile::SpawnHitFXEffect()
