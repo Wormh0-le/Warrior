@@ -70,11 +70,13 @@ FActiveGameplayEffectHandle UWarriorGameplayAbility::BP_WarriorApplyEffectSpecHa
 	return ActiveGameplayEffectHandle;
 }
 
-void UWarriorGameplayAbility::ApplyGameplayEffectSpecHandleToHitResults(const FGameplayEffectSpecHandle& InSpecHandle,
+void UWarriorGameplayAbility::ApplyGameplayEffectSpecHandleToHitResults(const FGameplayEffectSpecHandle& InSpecHandle, TSubclassOf<UGameplayEffect> RageGameplayEffectClass,
 	const TArray<FHitResult>& InHitResults)
 {
+	checkf(RageGameplayEffectClass, TEXT("Forget to assign attack profit gameplayEffect class"));
 	if (InHitResults.IsEmpty())	return;
 	APawn* OwningPawn = Cast<APawn>(GetAvatarActorFromActorInfo());
+	const UGameplayEffect* RageGameplayEffect = RageGameplayEffectClass->GetDefaultObject<UGameplayEffect>();
 
 	for (const FHitResult& Hit : InHitResults)
 	{
@@ -94,6 +96,7 @@ void UWarriorGameplayAbility::ApplyGameplayEffectSpecHandleToHitResults(const FG
 						WarriorGameplayTags::Shared_Event_HitReact,
 						EventData
 					);
+					ApplyGameplayEffectToOwner(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, RageGameplayEffect, GetAbilityLevel());
 				}
 			}
 		}

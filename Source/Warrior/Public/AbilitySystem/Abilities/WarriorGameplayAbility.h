@@ -41,5 +41,5 @@ protected:
 	FActiveGameplayEffectHandle BP_WarriorApplyEffectSpecHandle(AActor* TargetActor, const FGameplayEffectSpecHandle& InSpecHandle, EWarriorSuccessType& OutSuccessType);
 
 	UFUNCTION(BlueprintCallable, Category = "Warrior|Ability")
-	void ApplyGameplayEffectSpecHandleToHitResults(const FGameplayEffectSpecHandle& InSpecHandle, const TArray<FHitResult>& InHitResults);
+	void ApplyGameplayEffectSpecHandleToHitResults(const FGameplayEffectSpecHandle& InSpecHandle, TSubclassOf<UGameplayEffect> RageGameplayEffectClass, const TArray<FHitResult>& InHitResults);
 };
