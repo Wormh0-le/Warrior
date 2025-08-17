@@ -37,3 +37,18 @@ enum class EWarriorAbilityActivationPolicy : uint8
 	OnTriggered,
 	OnGiven
 };
+
+UENUM(BlueprintType)
+enum class EWarriorCountdownActionInput : uint8
+{
+	Start,
+	Cancel
+};
+
+UENUM(BlueprintType)
+enum class EWarriorCountdownActionOutput : uint8
+{
+	Updated,
+	Completed,
+	Canceled,
+};
