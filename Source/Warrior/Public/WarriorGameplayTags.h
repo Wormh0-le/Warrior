@@ -24,6 +24,7 @@ namespace WarriorGameplayTags
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Toggleable_TargetLock);
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_SpecialAbility_Light);
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_SpecialAbility_Heavy);
+	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_PickUp);
 	
 	// Player tags
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Equip_Axe);
@@ -35,6 +36,8 @@ namespace WarriorGameplayTags
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Block);
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_TargetLock);
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Rage);
+	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_PickUp_Stone);
+	
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_SpecialAbility_Attack_Light_Axe);
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_SpecialAbility_Attack_Heavy_Axe);
 	
@@ -50,6 +53,7 @@ namespace WarriorGameplayTags
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_SwitchTarget_Left);
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_SwitchTarget_Right);
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_ActivateRage);
+	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_PickUp);
 	
 
 	WARRIOR_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_JumpToFinish);

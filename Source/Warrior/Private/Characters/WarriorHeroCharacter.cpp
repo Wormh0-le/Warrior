@@ -64,6 +64,7 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_SwitchTarget, ETriggerEvent::Triggered, this, &ThisClass::Input_SwitchTargetTriggered);
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_SwitchTarget, ETriggerEvent::Completed, this, &ThisClass::Input_SwitchTargetCompleted);
+	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_PickUp, ETriggerEvent::Started, this, &ThisClass::Input_PickUpStarted);
 	
 	WarriorInputComponent->BindAbilityInputAction(InputConfigDataAsset, this, &ThisClass::Input_AbilityInputPressed, &ThisClass::Input_AbilityInputReleased);
 }
@@ -133,6 +134,17 @@ void AWarriorHeroCharacter::Input_SwitchTargetCompleted(const FInputActionValue&
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 		this,
 		SwitchDirection.X > 0 ? WarriorGameplayTags::Player_Event_SwitchTarget_Right : WarriorGameplayTags::Player_Event_SwitchTarget_Left,
+		EventData
+	);
+}
+
+void AWarriorHeroCharacter::Input_PickUpStarted(const FInputActionValue& InputActionValue)
+{
+	FGameplayEventData EventData;
+	
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
+		this,
+		WarriorGameplayTags::Player_Event_PickUp,
 		EventData
 	);
 }
