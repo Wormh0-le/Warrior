@@ -63,3 +63,12 @@ enum class EWarriorSurvivalGameModeState: uint8
 	AllWavesDone,
 	PlayerDied
 };
+
+UENUM(BlueprintType)
+enum class EWarriorGameDifficulty : uint8
+{
+	Easy,
+	Normal,
+	Hard,
+	VeryHard
+};

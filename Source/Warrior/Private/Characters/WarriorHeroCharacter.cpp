@@ -17,6 +17,10 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
+#include "GameModes/WarriorBaseGameMode.h"
+
+#include "WarriorTypes/WarriorEnumTypes.h"
+
 
 AWarriorHeroCharacter::AWarriorHeroCharacter()
 {
@@ -76,7 +80,28 @@ void AWarriorHeroCharacter::PossessedBy(AController* NewController)
 	{
 		if (UDataAsset_StartupDataBase* LoadedData = CharacterStartupData.LoadSynchronous())
 		{
-			LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent);
+			int32 AbilityApplyLevel = 1;
+			if (AWarriorBaseGameMode* GameMode = GetWorld()->GetAuthGameMode<AWarriorBaseGameMode>())
+			{
+				switch (GameMode->GetGameDifficulty())
+				{
+				case EWarriorGameDifficulty::Easy:
+					AbilityApplyLevel = 4;
+					break;
+				case EWarriorGameDifficulty::Normal:
+					AbilityApplyLevel = 3;
+					break;
+				case EWarriorGameDifficulty::Hard:
+					AbilityApplyLevel = 2;
+					break;
+				case EWarriorGameDifficulty::VeryHard:
+					AbilityApplyLevel = 1;
+					break;
+				default:
+					break;
+				}
+			}
+			LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent, AbilityApplyLevel);
 		}
 	}
 }
