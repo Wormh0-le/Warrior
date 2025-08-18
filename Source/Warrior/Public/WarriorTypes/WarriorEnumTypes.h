@@ -52,3 +52,14 @@ enum class EWarriorCountdownActionOutput : uint8
 	Completed,
 	Canceled,
 };
+
+UENUM(BlueprintType)
+enum class EWarriorSurvivalGameModeState: uint8
+{
+	WaitSpawnNewWave,
+	SpawningNewWave,
+	InProgress,
+	WaveCompleted,
+	AllWavesDone,
+	PlayerDied
+};

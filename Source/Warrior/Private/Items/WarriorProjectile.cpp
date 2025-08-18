@@ -94,9 +94,14 @@ void AWarriorProjectile::BeginPlay()
 void AWarriorProjectile::OnProjectileHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	FVector NormalImpulse, const FHitResult& Hit)
 {
-	APawn* HitPawn = Cast<APawn>(OtherActor);
-	if (!HitPawn || !UWarriorFunctionLibrary::IsTargetPawnHostile(GetInstigator(), HitPawn))	return;
 	SpawnHitFXEffect();
+	APawn* HitPawn = Cast<APawn>(OtherActor);
+	if (!HitPawn || !UWarriorFunctionLibrary::IsTargetPawnHostile(GetInstigator(), HitPawn))
+	{
+		Destroy();
+		return;
+	}
+	
 	bool bIsValidBlock = false;
 	const bool bIsPlayerBlocking = UWarriorFunctionLibrary::NativeDoesActorHasTag(HitPawn, WarriorGameplayTags::Player_Status_Blocking);
 	if (bIsPlayerBlocking)
