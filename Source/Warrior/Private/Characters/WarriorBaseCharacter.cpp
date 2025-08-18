@@ -31,12 +31,12 @@ UAbilitySystemComponent* AWarriorBaseCharacter::GetAbilitySystemComponent() cons
 	return GetWarriorAbilitySystemComponent();
 }
 
-UPawnCombatComponent* AWarriorBaseCharacter::GetPawnCombatComponent() const
+UPawnCombatComponent* AWarriorBaseCharacter::GetPawnCombatComponentFromInterface() const
 {
 	return nullptr;
 }
 
-UPawnUIComponent* AWarriorBaseCharacter::GetPawnUIComponent() const
+UPawnUIComponent* AWarriorBaseCharacter::GetPawnUIComponentFromInterface() const
 {
 	return nullptr;
 }

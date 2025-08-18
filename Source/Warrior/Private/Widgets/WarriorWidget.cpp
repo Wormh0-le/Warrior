@@ -12,7 +12,7 @@ void UWarriorWidget::NativeOnInitialized()
 	Super::NativeOnInitialized();
 	if (IPawnUIInterface* PawnUIInterface = Cast<IPawnUIInterface>(GetOwningPlayerPawn()))
 	{
-		if (UHeroUIComponent* HeroUIComponent = PawnUIInterface->GetHeroUIComponent())
+		if (UHeroUIComponent* HeroUIComponent = PawnUIInterface->GetHeroUIComponentFromInterface())
 		{
 			BP_OnOwningHeroUIComponentInitialized(HeroUIComponent);
 		}
@@ -23,7 +23,7 @@ void UWarriorWidget::InitEnemyUIComponent(AActor* InEnemyActor)
 {
 	if (IPawnUIInterface* PawnUIInterface = Cast<IPawnUIInterface>(InEnemyActor))
 	{
-		UEnemyUIComponent* EnemyUIComponent = PawnUIInterface->GetEnemyUIComponent();
+		UEnemyUIComponent* EnemyUIComponent = PawnUIInterface->GetEnemyUIComponentFromInterface();
 		checkf(EnemyUIComponent, TEXT("Failed to get EnemyUIComponent from %s!"), *InEnemyActor->GetActorNameOrLabel());
 		BP_OnOwningEnemyUIComponentInitialized(EnemyUIComponent);
 	}

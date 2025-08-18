@@ -31,14 +31,13 @@ protected:
 	//~ End APawn Interface.
 
 	//~ Begin PawnCombatInterface Interface.
-	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+	virtual UPawnCombatComponent* GetPawnCombatComponentFromInterface() const override;
 	//~ End PawnCombatInterface Interface.
 
 	//~ Begin PawnUIInterface Interface.
-	virtual UPawnUIComponent* GetPawnUIComponent() const override;
-	virtual UHeroUIComponent* GetHeroUIComponent() const override;
+	virtual UPawnUIComponent* GetPawnUIComponentFromInterface() const override;
+	virtual UHeroUIComponent* GetHeroUIComponentFromInterface() const override;
 	//~ End PawnUIInterface Interface.
-
 private:
 #pragma region Components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
@@ -75,4 +74,5 @@ private:
 	
 public:
 	FORCEINLINE UHeroCombatComponent* GetHeroCombatComponent() const { return HeroCombatComponent; }
+	FORCEINLINE UHeroUIComponent* GetHeroUIComponent() const { return HeroUIComponent; }
 };

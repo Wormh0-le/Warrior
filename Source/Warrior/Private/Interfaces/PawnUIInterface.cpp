@@ -4,12 +4,12 @@
 #include "Interfaces/PawnUIInterface.h"
 
 
-UHeroUIComponent* IPawnUIInterface::GetHeroUIComponent() const
+UHeroUIComponent* IPawnUIInterface::GetHeroUIComponentFromInterface() const
 {
 	return nullptr;
 }
 
-UEnemyUIComponent* IPawnUIInterface::GetEnemyUIComponent() const
+UEnemyUIComponent* IPawnUIInterface::GetEnemyUIComponentFromInterface() const
 {
 	return nullptr;
 }

@@ -54,7 +54,7 @@ UPawnCombatComponent* UWarriorFunctionLibrary::NativeGetPawnCombatComponentFromA
 	check(InActor);
 	if (IPawnCombatInterface* PawnCombatInterface = Cast<IPawnCombatInterface>(InActor))
 	{
-		return PawnCombatInterface->GetPawnCombatComponent();
+		return PawnCombatInterface->GetPawnCombatComponentFromInterface();
 	}
 	return nullptr;
 }

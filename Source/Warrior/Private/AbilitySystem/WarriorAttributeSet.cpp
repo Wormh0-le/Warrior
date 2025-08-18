@@ -28,7 +28,7 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCal
 {
 	PawnUIInterface = PawnUIInterface.IsValid() ? PawnUIInterface : TWeakInterfacePtr<IPawnUIInterface>(Data.Target.GetAvatarActor());
 	checkf(PawnUIInterface.IsValid(), TEXT("%s didn't implement IPawnUIInterface!"), *Data.Target.GetAvatarActor()->GetActorNameOrLabel());
-	UPawnUIComponent* PawnUIComponent = PawnUIInterface->GetPawnUIComponent();
+	UPawnUIComponent* PawnUIComponent = PawnUIInterface->GetPawnUIComponentFromInterface();
 	checkf(PawnUIComponent, TEXT("Couldn't extract PawnUIComponent from %s!"), *Data.Target.GetAvatarActor()->GetActorNameOrLabel());
 	
 	if (Data.EvaluatedData.Attribute == GetCurrentHealthAttribute()) {
@@ -50,7 +50,7 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCal
 			UWarriorFunctionLibrary::RemoveGameplayTagFromActorIfFound(Data.Target.GetAvatarActor(), WarriorGameplayTags::Player_Status_Rage_Full);
 			UWarriorFunctionLibrary::RemoveGameplayTagFromActorIfFound(Data.Target.GetAvatarActor(), WarriorGameplayTags::Player_Status_Rage_Empty);
 		} 
-		UHeroUIComponent* HeroUIComponent = PawnUIInterface->GetHeroUIComponent();
+		UHeroUIComponent* HeroUIComponent = PawnUIInterface->GetHeroUIComponentFromInterface();
 		checkf(HeroUIComponent, TEXT("Couldn't extract HeroUIComponent from %s!"), *Data.Target.GetAvatarActor()->GetActorNameOrLabel());
 		HeroUIComponent->OnRageChanged.Broadcast(GetCurrentRage() / GetMaxRage());
 	}

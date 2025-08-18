@@ -66,17 +66,17 @@ void AWarriorEnemyCharacter::PossessedBy(AController* NewController)
 	InitEnemyStartupData();
 }
 
-UPawnCombatComponent* AWarriorEnemyCharacter::GetPawnCombatComponent() const
+UPawnCombatComponent* AWarriorEnemyCharacter::GetPawnCombatComponentFromInterface() const
 {
 	return EnemyCombatComponent;
 }
 
-UPawnUIComponent* AWarriorEnemyCharacter::GetPawnUIComponent() const
+UPawnUIComponent* AWarriorEnemyCharacter::GetPawnUIComponentFromInterface() const
 {
 	return EnemyUIComponent;
 }
 
-UEnemyUIComponent* AWarriorEnemyCharacter::GetEnemyUIComponent() const
+UEnemyUIComponent* AWarriorEnemyCharacter::GetEnemyUIComponentFromInterface() const
 {
 	return EnemyUIComponent;
 }

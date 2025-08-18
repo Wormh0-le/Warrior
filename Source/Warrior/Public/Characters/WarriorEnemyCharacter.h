@@ -36,12 +36,12 @@ protected:
 	//~ End APawn Interface.
 
 	//~ Begin PawnCombatInterface Interface.
-	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+	virtual UPawnCombatComponent* GetPawnCombatComponentFromInterface() const override;
 	//~ End PawnCombatInterface Interface.
 
 	//~ Begin PawnUIInterface Interface.
-	virtual UPawnUIComponent* GetPawnUIComponent() const override;
-	virtual UEnemyUIComponent* GetEnemyUIComponent() const override;
+	virtual UPawnUIComponent* GetPawnUIComponentFromInterface() const override;
+	virtual UEnemyUIComponent* GetEnemyUIComponentFromInterface() const override;
 	//~ End PawnUIInterface Interface.
 private:
 	void InitEnemyStartupData();

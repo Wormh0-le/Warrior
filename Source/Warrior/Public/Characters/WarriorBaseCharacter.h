@@ -31,11 +31,11 @@ public:
 	//~ End AbilitySystemComponent Interface.
 
 	//~ Begin PawnCombatInterface Interface.
-	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+	virtual UPawnCombatComponent* GetPawnCombatComponentFromInterface() const override;
 	//~ End PawnCombatInterface Interface.
 
 	//~ Begin PawnUIInterface Interface.
-	virtual UPawnUIComponent* GetPawnUIComponent() const override;
+	virtual UPawnUIComponent* GetPawnUIComponentFromInterface() const override;
 	//~ End PawnUIInterface Interface.
 protected:
 	//~ Begin APawn Interface.

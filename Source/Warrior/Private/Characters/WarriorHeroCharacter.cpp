@@ -81,17 +81,17 @@ void AWarriorHeroCharacter::PossessedBy(AController* NewController)
 	}
 }
 
-UPawnCombatComponent* AWarriorHeroCharacter::GetPawnCombatComponent() const
+UPawnCombatComponent* AWarriorHeroCharacter::GetPawnCombatComponentFromInterface() const
 {
 	return HeroCombatComponent;
 }
 
-UPawnUIComponent* AWarriorHeroCharacter::GetPawnUIComponent() const
+UPawnUIComponent* AWarriorHeroCharacter::GetPawnUIComponentFromInterface() const
 {
 	return HeroUIComponent;
 }
 
-UHeroUIComponent* AWarriorHeroCharacter::GetHeroUIComponent() const
+UHeroUIComponent* AWarriorHeroCharacter::GetHeroUIComponentFromInterface() const
 {
 	return HeroUIComponent;
 }
