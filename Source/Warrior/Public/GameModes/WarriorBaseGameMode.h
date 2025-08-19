@@ -17,6 +17,8 @@ class WARRIOR_API AWarriorBaseGameMode : public AGameModeBase
 public:
 	AWarriorBaseGameMode();
 
+	virtual void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
+
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Game Settings")
 	EWarriorGameDifficulty CurrentGameDifficulty;
