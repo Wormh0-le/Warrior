@@ -87,3 +87,20 @@ struct FWarriorEnemyWaveSpawnerTableRow : public FTableRowBase
 	UPROPERTY(EditAnywhere)
 	int32 TotalEnemyToSpawnThisWave = 1;
 };
+
+USTRUCT(BlueprintType)
+struct FWarriorGameLevelSet
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, meta = (Categories = "GameData.Level"))
+	FGameplayTag LevelTag;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSoftObjectPtr<UWorld> Level;
+
+	bool IsValid() const
+	{
+		return LevelTag.IsValid() && !Level.IsNull();
+	}
+};

@@ -7,6 +7,7 @@
 #include "WarriorTypes/WarriorEnumTypes.h"
 #include "WarriorFunctionLibrary.generated.h"
 
+class UWarriorGameInstance;
 struct FGameplayEffectSpecHandle;
 class UPawnCombatComponent;
 struct FGameplayTag;
@@ -56,4 +57,11 @@ public:
 		float& OutRemainingTime, EWarriorCountdownActionInput CountdownInput,
 		UPARAM(DisplayName = "Output") EWarriorCountdownActionOutput& CountdownOutput, FLatentActionInfo LatentActionInfo
 	);
+
+	UFUNCTION(BlueprintPure, Category = "Warrior| FunctionLibrary", meta = (WorldContext = "WorldContextObject"))
+	static UWarriorGameInstance* GetWarriorGameInstance(const UObject* WorldContextObject);
+
+	UFUNCTION(BlueprintCallable, Category = "Warrior| FunctionLibrary", meta = (WorldContext = "WorldContextObject"))
+	static void ToggleInputMode(const UObject* WorldContextObject, EWarriorInputMode InputMode);
+	
 };
